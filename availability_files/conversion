@@ -1,0 +1,74 @@
+(function (itp) {
+    var isStorage;
+    function generateFingerprintAndScript(adUrl) {
+        var generateFingerprint = function () {
+            Fingerprint2.get(function (components) {
+                console.log(components);
+                var values = components.map(function (component) {
+                    return component.value
+                });
+                var murmur = Fingerprint2.x64hash128(values.join(''), 31);
+                console.log(murmur);
+                if (isStorage) {
+                    localStorage.setItem("murmur", murmur);
+                }
+                generateScript(adUrl, murmur);
+            });
+        }
+        var script = document.createElement('script');
+        script.onload = function () {
+            setTimeout(function () {
+                generateFingerprint();
+            }, 1000);
+        };
+        script.src = "https://cdn.brand-display.com/sv/js/fingerprint2.min.js";
+        document.head.appendChild(script);
+    }
+    function generateScript(adUrl, murmur) {
+        if ((adUrl.includes('/conversion?') || adUrl.includes('/remarketing?'))) {
+            var imgElement = document.createElement('img');
+            imgElement.setAttribute("style", "display: none;");
+            imgElement.src = encodeURI(adUrl + "&bf=" + murmur + "&itp=" + itp);
+            document.body.appendChild(imgElement);
+        } else {
+            var scriptElement = document.createElement('script');
+            scriptElement.src = encodeURI(adUrl + "&bf=" + murmur + "&itp=" + itp);
+            document.head.appendChild(scriptElement);
+        }
+    }
+    function generateAd(adUrl) {
+        if (adUrl.includes('&bf')) {
+            if (!localStorage.getItem('murmur')) {
+                const urlParams = new URLSearchParams(adUrl);
+                const myParam = urlParams.get('bf');
+                localStorage.setItem("murmur", myParam);
+            }
+            if ((adUrl.includes('/conversion?') || adUrl.includes('/remarketing?'))) {
+                var imgElement = document.createElement('img');
+                imgElement.setAttribute("style", "display: none;");
+                imgElement.src = encodeURI(adUrl + "&itp=" + itp);
+                document.body.appendChild(imgElement);
+            } else {
+                var scriptElement = document.createElement('script');
+                scriptElement.src = encodeURI(adUrl + "&itp=" + itp);
+                document.head.appendChild(scriptElement);
+            }
+        } else {
+            if (typeof (Storage) !== "undefined") {
+                isStorage = true;
+                if (localStorage.getItem("murmur")) {
+                    generateScript(adUrl, localStorage.getItem("murmur"));
+                } else {
+                    generateFingerprintAndScript(adUrl);
+                }
+            } else {
+                isStorage = false;
+                generateFingerprintAndScript(adUrl);
+            }
+        }
+    }
+
+    var currentScript = document.currentScript;
+    var srcVal = currentScript.getAttribute('src');
+    generateAd(srcVal);
+})(true);

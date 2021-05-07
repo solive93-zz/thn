@@ -1,0 +1,127 @@
+
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://ad.doubleclick.net/ddm/activity/src=5387533;type=sales;cat=y83hdf9s;qty=1;cost=3313.51;u1=;u2=;u3=THB;u4=2021-05-06;u5=2021-05-07;u9=1;u10=Phuket;u11=TH;u12=1;u14=DELUXE%2BKING;u16=THB;u17=DELUXE%2BKING;u19=thphu18547;u20=Centara%2BGrand%2BBeach%2BResort%2BPhuket;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=[OrderID]');\
+    document.body.appendChild(i);\
+    ";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://cm.g.doubleclick.net/pixel?google_cm=true&google_hm=NpTSiQR78ABmITjfPg7TDA&google_nid=sojern__adx_open_bidder_seat&google_sc=true&sjrn_id=ObAuE8tdV8oJAMFF96I06tDZqPfqAv36UwwTLgTYadbiGVx9gQHHTIZ_F6rY4vFb');\
+    document.body.appendChild(i);\
+";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://cm.g.doubleclick.net/pixel?google_hm=NpTSiQR78ABmITjfPg7TDA&google_nid=sojern_adh');\
+    document.body.appendChild(i);\
+";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://ib.adnxs.com/getuid?https://pixel.sojern.com/idsync/apn?id=$UID&sjrn_id=ObAuE8tdV8oJAMFF96I06tDZqPfqAv36UwwTLgTYadbiGVx9gQHHTIZ_F6rY4vFb');\
+    document.body.appendChild(i);\
+";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://match.adsrvr.org/track/cmf/generic?ttd_pid=ombl9hp&ttd_puid=ObAuE8tdV8oJAMFF96I06tDZqPfqAv36UwwTLgTYadbiGVx9gQHHTIZ_F6rY4vFb&ttd_tpi=1');\
+    document.body.appendChild(i);\
+";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
+    (function () {
+        var s = document.createElement('script');
+        var p = "var i = document.createElement('img');\
+    i.setAttribute('alt', '');\
+    i.setAttribute('height', '1');\
+    i.setAttribute('width', '1');\
+    i.setAttribute('style', 'display: none;');\
+    i.setAttribute('src', 'https://ad.doubleclick.net/ddm/activity/src=5387533;type=sales;cat=z2pv9zxu;qty=1;cost=3313.51;u1=;u4=2021-05-06;u5=2021-05-07;u10=Phuket;u11=TH;u13=;u16=THB;u17=DELUXE%2BKING;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=[OrderID]');\
+    document.body.appendChild(i);\
+    ";
+
+        s.type = 'text/javascript';
+        s.async = true;
+        if (s.textContent) {
+            s.textContent = p;
+        } else {
+            s.text = p;
+        }
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    
