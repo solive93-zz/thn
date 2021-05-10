@@ -2,17 +2,16 @@
 
 function getSearchData() {
     return {
-        checkIn: "2021-06-21",
-        checkOut: "albatrose",
-        minimumPrice: 354.71,
-        currencyCode: 'EUR',
-        numberOfRooms: 1,
-        numberOfGuests: {
-            adults: 2,
-            children: 1
-        },
-        totalAmountOfGuests: 3,
-        languageCode: 'ES',
+        checkIn: getCheckInDate(),
+        checkOut: getCheckOutDate(),
+        minimumPrice: getMinimumPrice(),
+        // specialMemberPrice: ,
+        priceForMembers: getMemberPrice(),
+        currencyCode: getCurrency(),
+        numberOfRooms: getNumberOfRooms(),
+        numberOfGuests: getNumberOfGuests(),
+        totalAmountOfGuests: getTotalAmountOfGuests(),
+        languageCode: getLanguageCode(),
         roomDetails: {},
         allRates: {}
     };
@@ -47,6 +46,13 @@ function getMinimumPrice() {
     // return Math.round(price * 100) / 100;
 }
 
+function getMemberPrice() {
+    let memberPriceTag = document.querySelector('.btn--member-price')
+    let price = memberPriceTag.querySelector('.fb-price').getAttribute('data-price')
+
+    return Math.round(price * 100) / 100;
+}
+
 function getCurrency() {
     let currency = document.getElementById('fb-headbar-block-currency').querySelector('.fb-headbar-value').textContent;
     let currencyCode = currency.substring(
@@ -77,10 +83,49 @@ function getTotalAmountOfGuests() {
 
 function getLanguageCode() {
     let lang = document.firstElementChild.getAttribute('lang')
-    return lang.toUpperCase()
+    // return lang.toUpperCase()
+    return 'ES'
 }
 
+function getRoomDetails() {
+    // The text returned is in the language of the search
+    let breakfast = document.querySelector("[data-key='results-rate-meal-type-breakfast']").textContent
+    let refundable = document.querySelector("[data-key='warrant-cancellable-amendable']").textContent
+    let payment = document.querySelector("[data-key='results-rate-payment-hotel']").textContent
+    
+    let roomDetailsTag = document.getElementById('fb-roomdetails')
+    let capacity = roomDetailsTag.querySelector("[data-key='person']").getAttribute('data-mode')
+    
+    // Could I make them booleans -> includeBreakfast, isRefundable, payInHotel?
+    return {
+        breakfast: breakfast,
+        refundPolicy: refundable,
+        payment: payment,
+        capacity: capacity
+    }
+}
 
+function getAllRoomsRates() {
+    let results = document.getElementsByClassName('fb-results-accommodation')
+    let roomsRates = []
+    
+    Array.from(results).forEach( (room, index, array) => {
+        let roomInfo = {}, roomDetails = {}
+        let roomDetailsTag = document.getElementById('fb-roomdetails')
+        
+        roomInfo.capacity = roomDetailsTag.querySelector("[data-key='person']").getAttribute('data-mode')
+        roomInfo.price = room.querySelector(".new-price").firstChild.getAttribute('data-price');
+        
+        roomDetails.breakfast = room.querySelector("[data-key='results-rate-meal-type-breakfast']").textContent
+        roomDetails.refundable = room.querySelector("[data-key='warrant-cancellable-amendable']").textContent
+        roomDetails.payment = room.querySelector("[data-key='results-rate-payment-hotel']").textContent
+        roomInfo.roomDetails = roomDetails
 
-module.exports = getSearchData;
+        roomsRates.push(roomInfo);
+    })
+    return roomsRates;
+}
+ 
+
+module.exports = getSearchData
 // vs export default ¿?

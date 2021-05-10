@@ -10085,6 +10085,20 @@
         src="./availability_files/getuid(1)"><img alt="" height="1" width="1" style="display: none;"
         src="./availability_files/generic(1)"><img alt="" height="1" width="1" style="display: none;"
         src="./availability_files/src=5387533(3)">
+        <script>
+            document.onload = function() {
+                console.log('window onload!')
+                try {
+                    getSearchData()
+                } catch (error) {
+                    throw new Error("FUNCTION NOT CALLED")
+                }
+           
+            }
+            document.onerror = function() {
+            console.log('function not executed!')
+        }
+        </script>
         <script type="text/javascript" src="parser.js"></script>
 </body>
 
