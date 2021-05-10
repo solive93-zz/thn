@@ -5,15 +5,14 @@ function getSearchData() {
         checkIn: getCheckInDate(),
         checkOut: getCheckOutDate(),
         minimumPrice: getMinimumPrice(),
-        // specialMemberPrice: ,
         priceForMembers: getMemberPrice(),
         currencyCode: getCurrency(),
         numberOfRooms: getNumberOfRooms(),
         numberOfGuests: getNumberOfGuests(),
         totalAmountOfGuests: getTotalAmountOfGuests(),
         languageCode: getLanguageCode(),
-        roomDetails: {},
-        allRates: {}
+        roomDetails: getRoomDetails(),
+        allRates: getAllRoomsRates()
     };
 }
 
@@ -30,7 +29,7 @@ function getCheckOutDate() {
 function getMinimumPrice() {
     let results = document.getElementsByClassName('fb-results-accommodation')
     let lowestPrice = 0;
-    // Since the prices are displayed in order from lowest to highest, I could just pick the first one
+    
     Array.from(results).forEach( (room, index, array) => {
         let price = room.querySelector(".new-price").firstChild.getAttribute('data-price');
         if(index === 0 || parseFloat(price) < parseFloat(lowestPrice)) {
@@ -38,12 +37,6 @@ function getMinimumPrice() {
         }
     })
     return Math.round(lowestPrice * 100) / 100;
-
-    // I could probably do something like this:
-
-    // let firstResult = document.querySelector('.fb-results-accommodation');
-    // let price = firstResult.querySelector(".new-price").firstChild.getAttribute('data-price');
-    // return Math.round(price * 100) / 100;
 }
 
 function getMemberPrice() {
@@ -83,8 +76,7 @@ function getTotalAmountOfGuests() {
 
 function getLanguageCode() {
     let lang = document.firstElementChild.getAttribute('lang')
-    // return lang.toUpperCase()
-    return 'ES'
+    return lang.toUpperCase();
 }
 
 function getRoomDetails() {
@@ -93,15 +85,11 @@ function getRoomDetails() {
     let refundable = document.querySelector("[data-key='warrant-cancellable-amendable']").textContent
     let payment = document.querySelector("[data-key='results-rate-payment-hotel']").textContent
     
-    let roomDetailsTag = document.getElementById('fb-roomdetails')
-    let capacity = roomDetailsTag.querySelector("[data-key='person']").getAttribute('data-mode')
-    
-    // Could I make them booleans -> includeBreakfast, isRefundable, payInHotel?
     return {
         breakfast: breakfast,
         refundPolicy: refundable,
         payment: payment,
-        capacity: capacity
+        
     }
 }
 
@@ -111,13 +99,11 @@ function getAllRoomsRates() {
     
     Array.from(results).forEach( (room, index, array) => {
         let roomInfo = {}, roomDetails = {}
-        let roomDetailsTag = document.getElementById('fb-roomdetails')
+        let price = + room.querySelector(".new-price").firstChild.getAttribute('data-price');
         
-        roomInfo.capacity = roomDetailsTag.querySelector("[data-key='person']").getAttribute('data-mode')
-        roomInfo.price = room.querySelector(".new-price").firstChild.getAttribute('data-price');
-        
+        roomInfo.price = Math.round(price * 100) / 100;
         roomDetails.breakfast = room.querySelector("[data-key='results-rate-meal-type-breakfast']").textContent
-        roomDetails.refundable = room.querySelector("[data-key='warrant-cancellable-amendable']").textContent
+        roomDetails.refundPolicy = room.querySelector("[data-key='warrant-cancellable-amendable']").textContent
         roomDetails.payment = room.querySelector("[data-key='results-rate-payment-hotel']").textContent
         roomInfo.roomDetails = roomDetails
 

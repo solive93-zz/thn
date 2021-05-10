@@ -1,5 +1,5 @@
-module.exports = {
-    "setupFiles": [
-        "./config/__mocks__/client.js"
-      ],
-}
+const config = {
+  verbose: true,
+};
+
+module.exports = config;

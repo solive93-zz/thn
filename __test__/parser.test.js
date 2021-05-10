@@ -5,17 +5,16 @@ const html = fs.readFileSync(path.resolve(__dirname, '../availability.html'), 'u
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const dom = new JSDOM(html)
-
 const htmlBody = dom.window.document.body.innerHTML
+const getSearchData = require("../parser.js")
 
 global.document = dom.window.document
 global.window = dom.window
 
-const getSearchData = require("../parser.js")
-
 
 beforeAll(() => {
     document.body.innerHTML = htmlBody
+    document.firstElementChild.setAttribute("lang", "es")
   })
 
 describe('Test getUserSearchData function against availability.html', () => {
@@ -73,19 +72,21 @@ describe('Test getUserSearchData function against availability.html', () => {
             expect(typeof getSearchData().totalAmountOfGuests).toBe('number')
         })
 
-        it('contain the language code', () => {
+        it('should contain the language code', () => {
             expect(getSearchData().languageCode).toBe('ES')
             expect(typeof getSearchData().languageCode).toBe('string')
         })
+
+        it('should contain the room details', () => {
+            expect(getSearchData().roomDetails.breakfast).toBe("Desayuno incluido")
+            expect(getSearchData().roomDetails.refundPolicy).toBe("Cancelable, modificable")
+            expect(getSearchData().roomDetails.payment).toBe("Pagar más tarde")
+            expect(typeof getSearchData().roomDetails).toBe('object')
+        })
+
+        it('should contain all the available rooms rates', () => {
+            expect(getSearchData().allRates.length).toBe(9)
+            expect(getSearchData().allRates[0].price).toBe(354.71)
+        })
     })
 })
-// ----------------------------------
-// describe('The returned object should', () => {
-//     
-//   
-
-//     test('contain the language code', () => {
-//         expect(getSearchData().langaugeCode).toBe('ES')
-//         expect(typeof getSearchData().langaugeCode).toBe('string')
-//     })
-// })
