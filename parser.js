@@ -1,4 +1,6 @@
-// document.addEventListener('DOMContentLoaded', ()=>{ all your code })
+document.addEventListener('DOMContentLoaded', () => { 
+    getSearchData() 
+})
 
 function getSearchData() {
     return {
@@ -89,7 +91,6 @@ function getRoomDetails() {
         breakfast: breakfast,
         refundPolicy: refundable,
         payment: payment,
-        
     }
 }
 

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">97.87% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/46</span>
+                <span class='fraction'>46/47</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">97.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/45</span>
+                <span class='fraction'>45/46</span>
             </div>
         
             
@@ -174,20 +174,12 @@
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,12 +218,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,10 +264,6 @@
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -309,14 +291,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// document.addEventListener('DOMContentLoaded', ()=&gt;{ all your code })
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">document.addEventListener('DOMContentLoaded', <span class="fstat-no" title="function not covered" >()</span> =&gt; { 
+<span class="cstat-no" title="statement not covered" >    getSearchData() </span>
+})
 &nbsp;
 function getSearchData() {
     return {
         checkIn: getCheckInDate(),
         checkOut: getCheckOutDate(),
         minimumPrice: getMinimumPrice(),
-        // specialMemberPrice: ,
         priceForMembers: getMemberPrice(),
         currencyCode: getCurrency(),
         numberOfRooms: getNumberOfRooms(),
@@ -341,7 +324,7 @@ function getCheckOutDate() {
 function getMinimumPrice() {
     let results = document.getElementsByClassName('fb-results-accommodation')
     let lowestPrice = 0;
-    // Since the prices are displayed in order from lowest to highest, I could just pick the first one
+    
     Array.from(results).forEach( (room, index, array) =&gt; {
         let price = room.querySelector(".new-price").firstChild.getAttribute('data-price');
         if(index === 0 || parseFloat(price) &lt; parseFloat(lowestPrice)) {
@@ -349,12 +332,6 @@ function getMinimumPrice() {
         }
     })
     return Math.round(lowestPrice * 100) / 100;
-&nbsp;
-    // I could probably do something like this:
-&nbsp;
-    // let firstResult = document.querySelector('.fb-results-accommodation');
-    // let price = firstResult.querySelector(".new-price").firstChild.getAttribute('data-price');
-    // return Math.round(price * 100) / 100;
 }
 &nbsp;
 function getMemberPrice() {
@@ -403,14 +380,10 @@ function getRoomDetails() {
     let refundable = document.querySelector("[data-key='warrant-cancellable-amendable']").textContent
     let payment = document.querySelector("[data-key='results-rate-payment-hotel']").textContent
     
-    let roomDetailsTag = document.getElementById('fb-roomdetails')
-    // let capacity = roomDetailsTag.querySelector("[data-key='person']").getAttribute('data-mode')
-    
     return {
         breakfast: breakfast,
         refundPolicy: refundable,
         payment: payment,
-        
     }
 }
 &nbsp;
@@ -442,7 +415,7 @@ module.exports = getSearchData
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon May 10 2021 14:51:00 GMT+0200 (Hora d’estiu del Centre d’Europa)
+                at Mon May 10 2021 15:56:44 GMT+0200 (Hora d’estiu del Centre d’Europa)
             </div>
         </div>
         <script src="prettify.js"></script>

@@ -18,11 +18,9 @@ beforeAll(() => {
   })
 
 describe('Test getUserSearchData function against availability.html', () => {
-    // test('when not executed, it should throw an error', () => {
-    //     // const functionNotCalled = () => { throw new TypeError("FUNCTION NOT CALLED") }
-        
-    //     // expect(functionNotCalled).toThrow(TypeError)
-    //     // expect(functionNotCalled).toThrow("FUNCTION NOT CALLED")
+    // test('when not executed, it should throw an error', () => {       
+    //     expect(getSearchData).toThrow(TypeError)
+    //     expect(getSearchData).toThrow("FUNCTION NOT CALLED")
     // })
 
     test('when executed, the return value should be an object', () => {
