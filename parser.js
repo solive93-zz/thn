@@ -1,31 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => { 
+    alert('hey')
     getSearchData() 
 })
 
 function getSearchData() {
-    return {
-        checkIn: getCheckInDate(),
-        checkOut: getCheckOutDate(),
-        minimumPrice: getMinimumPrice(),
-        priceForMembers: getMemberPrice(),
-        currencyCode: getCurrency(),
-        numberOfRooms: getNumberOfRooms(),
-        numberOfGuests: getNumberOfGuests(),
-        totalAmountOfGuests: getTotalAmountOfGuests(),
-        languageCode: getLanguageCode(),
-        roomDetails: getRoomDetails(),
-        allRates: getAllRoomsRates()
-    };
+    try {
+        return {
+            checkIn: getCheckInDate(),
+            checkOut: getCheckOutDate(),
+            minimumPrice: getMinimumPrice(),
+            priceForMembers: getMemberPrice(),
+            currencyCode: getCurrency(),
+            numberOfRooms: getNumberOfRooms(),
+            numberOfGuests: getNumberOfGuests(),
+            totalAmountOfGuests: getTotalAmountOfGuests(),
+            languageCode: getLanguageCode(),
+            roomDetails: getRoomDetails(),
+            allRates: getAllRoomsRates()
+        };
+    } catch(error) {
+        throw new Error("DATA NOT FOUND")
+    }
 }
 
 function getCheckInDate() {
     let checkInTag = document.getElementById('fb-qs-summary-dates-arrival').firstChild;
-    return checkInTag.getAttribute('data-date')
+    return validate(checkInTag.getAttribute('data-date'))
 }
 
 function getCheckOutDate() {
     let checkOutTag = document.getElementById('fb-qs-summary-dates-departure').firstChild;
-    return checkOutTag.getAttribute('data-date')
+    return validate(checkOutTag.getAttribute('data-date'))
 }
 
 function getMinimumPrice() {
@@ -45,7 +50,7 @@ function getMemberPrice() {
     let memberPriceTag = document.querySelector('.btn--member-price')
     let price = memberPriceTag.querySelector('.fb-price').getAttribute('data-price')
 
-    return Math.round(price * 100) / 100;
+    return validate(Math.round(price * 100) / 100);
 }
 
 function getCurrency() {
@@ -53,32 +58,32 @@ function getCurrency() {
     let currencyCode = currency.substring(
         currency.indexOf( '(' ) +1, currency.indexOf( ')' ) 
     )
-    return currencyCode;
+    return validate(currencyCode);
 }
 
 function getNumberOfRooms() {
     let roomTag = document.getElementById('fb-qs-summary-rooms-quantity').firstChild;
-    return + roomTag.getAttribute('data-mode')
+    return validate(+ roomTag.getAttribute('data-mode'))
 }
 
 function getNumberOfGuests() {
     let adultsTag = document.getElementById('fb-qs-summary-rooms-adults').firstChild;
     let childrenTag = document.getElementById('fb-qs-summary-rooms-children').querySelector("[data-key='child']");
     
-    return {
+    return validate({
         adults: + adultsTag.getAttribute('data-mode'),
         children: + childrenTag.getAttribute('data-mode')
-    }
+    })
 }
 
 function getTotalAmountOfGuests() {
     let guests = getNumberOfGuests()
-    return guests.adults + guests.children
+    return validate(guests.adults + guests.children)
 }
 
 function getLanguageCode() {
     let lang = document.firstElementChild.getAttribute('lang')
-    return lang.toUpperCase();
+    return validate(lang.toUpperCase());
 }
 
 function getRoomDetails() {
@@ -87,11 +92,11 @@ function getRoomDetails() {
     let refundable = document.querySelector("[data-key='warrant-cancellable-amendable']").textContent
     let payment = document.querySelector("[data-key='results-rate-payment-hotel']").textContent
     
-    return {
+    return validate({
         breakfast: breakfast,
         refundPolicy: refundable,
         payment: payment,
-    }
+    })
 }
 
 function getAllRoomsRates() {
@@ -110,9 +115,14 @@ function getAllRoomsRates() {
 
         roomsRates.push(roomInfo);
     })
-    return roomsRates;
+    return validate(roomsRates);
 }
- 
+
+function validate(data) {
+    if(data !== undefined) {
+        return data;
+    }
+    throw new Error("DATA NOT FOUND")
+}
 
 module.exports = getSearchData
-// vs export default ¿?

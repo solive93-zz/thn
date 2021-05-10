@@ -18,11 +18,6 @@ beforeAll(() => {
   })
 
 describe('Test getUserSearchData function against availability.html', () => {
-    // test('when not executed, it should throw an error', () => {       
-    //     expect(getSearchData).toThrow(TypeError)
-    //     expect(getSearchData).toThrow("FUNCTION NOT CALLED")
-    // })
-
     test('when executed, the return value should be an object', () => {
         expect(typeof getSearchData()).toBe('object')
     })
@@ -86,5 +81,16 @@ describe('Test getUserSearchData function against availability.html', () => {
             expect(getSearchData().allRates.length).toBe(9)
             expect(getSearchData().allRates[0].price).toBe(354.71)
         })
+    })
+
+    test('when data not found, it should throw an error', () => {       
+        document.getElementById('fb-qs-summary-dates-arrival').firstChild.remove();
+        expect(getSearchData).toThrow(Error)
+        expect(getSearchData).toThrow("DATA NOT FOUND")
+    })
+
+    test('when data id undefined, it should throw an error', () => {       
+        expect(getSearchData).toThrow(Error)
+        expect(getSearchData).toThrow("DATA NOT FOUND")
     })
 })
