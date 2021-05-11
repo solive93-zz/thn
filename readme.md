@@ -6,7 +6,7 @@
 ## Usage
 1. Clone the repo
 
-``` https://github.com/solive93/thn.git ```
+``` git clone https://github.com/solive93/thn.git ```
 
 2. Run the tests (with coverage)
 
