@@ -5,7 +5,10 @@
   "main": "parser.js",
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "html"]
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   },
   "scripts": {
     "test": "jest --coverage"
@@ -17,6 +20,13 @@
     "@testing-library/dom": "^7.30.4",
     "@testing-library/jest-dom": "^5.12.0",
     "babel-preset-airbnb": "^5.0.0",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "@jest/globals": "^26.6.2",
+    "jsdom": "^16.5.3"
   }
 }
