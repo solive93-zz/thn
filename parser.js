@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => { 
-    getSearchData() 
-})
-
 function getSearchData() {
     try {
         return {
