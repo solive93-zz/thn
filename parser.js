@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => { 
-    alert('hey')
     getSearchData() 
 })
 
@@ -119,10 +118,10 @@ function getAllRoomsRates() {
 }
 
 function validate(data) {
-    if(data !== undefined) {
-        return data;
+    if(!data) {
+        throw new Error("DATA NOT FOUND")
     }
-    throw new Error("DATA NOT FOUND")
+    return data;
 }
 
 module.exports = getSearchData

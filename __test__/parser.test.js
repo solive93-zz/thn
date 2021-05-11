@@ -12,7 +12,7 @@ global.document = dom.window.document
 global.window = dom.window
 
 
-beforeAll(() => {
+beforeEach(() => {
     document.body.innerHTML = htmlBody
     document.firstElementChild.setAttribute("lang", "es")
   })
@@ -83,13 +83,15 @@ describe('Test getUserSearchData function against availability.html', () => {
         })
     })
 
-    test('when data not found, it should throw an error', () => {       
+    test('when DOM element not found, it should throw an error', () => {       
         document.getElementById('fb-qs-summary-dates-arrival').firstChild.remove();
+
         expect(getSearchData).toThrow(Error)
         expect(getSearchData).toThrow("DATA NOT FOUND")
     })
 
-    test('when data id undefined, it should throw an error', () => {       
+    test('when data is falsy, it should throw an error', () => {        
+        document.getElementById('fb-qs-summary-rooms-quantity').firstChild.setAttribute("data-mode", undefined);
         expect(getSearchData).toThrow(Error)
         expect(getSearchData).toThrow("DATA NOT FOUND")
     })
