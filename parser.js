@@ -19,21 +19,21 @@ function getSearchData() {
 }
 
 function getCheckInDate() {
-    let checkInTag = document.getElementById('fb-qs-summary-dates-arrival').firstChild;
+    let checkInTag = document.getElementById("fb-qs-summary-dates-arrival").firstChild;
     return validate(checkInTag.getAttribute('data-date'))
 }
 
 function getCheckOutDate() {
-    let checkOutTag = document.getElementById('fb-qs-summary-dates-departure').firstChild;
-    return validate(checkOutTag.getAttribute('data-date'))
+    let checkOutTag = document.getElementById("fb-qs-summary-dates-departure").firstChild;
+    return validate(checkOutTag.getAttribute("data-date"))
 }
 
 function getMinimumPrice() {
-    let results = document.getElementsByClassName('fb-results-accommodation')
+    let results = document.getElementsByClassName("fb-results-accommodation")
     let lowestPrice = 0;
     
     Array.from(results).forEach( (room, index, array) => {
-        let price = room.querySelector(".new-price").firstChild.getAttribute('data-price');
+        let price = room.querySelector(".new-price").firstChild.getAttribute("data-price");
         if(index === 0 || parseFloat(price) < parseFloat(lowestPrice)) {
             lowestPrice = price;
         }
@@ -42,32 +42,32 @@ function getMinimumPrice() {
 }
 
 function getMemberPrice() {
-    let memberPriceTag = document.querySelector('.btn--member-price')
-    let price = memberPriceTag.querySelector('.fb-price').getAttribute('data-price')
+    let memberPriceTag = document.querySelector(".btn--member-price")
+    let price = memberPriceTag.querySelector(".fb-price").getAttribute("data-price")
 
     return validate(Math.round(price * 100) / 100);
 }
 
 function getCurrency() {
-    let currency = document.getElementById('fb-headbar-block-currency').querySelector('.fb-headbar-value').textContent;
+    let currency = document.getElementById("fb-headbar-block-currency").querySelector(".fb-headbar-value").textContent;
     let currencyCode = currency.substring(
-        currency.indexOf( '(' ) +1, currency.indexOf( ')' ) 
+        currency.indexOf( "(" ) +1, currency.indexOf( ")" ) 
     )
     return validate(currencyCode);
 }
 
 function getNumberOfRooms() {
-    let roomTag = document.getElementById('fb-qs-summary-rooms-quantity').firstChild;
-    return validate(+ roomTag.getAttribute('data-mode'))
+    let roomTag = document.getElementById("fb-qs-summary-rooms-quantity").firstChild;
+    return validate(+ roomTag.getAttribute("data-mode"))
 }
 
 function getNumberOfGuests() {
-    let adultsTag = document.getElementById('fb-qs-summary-rooms-adults').firstChild;
-    let childrenTag = document.getElementById('fb-qs-summary-rooms-children').querySelector("[data-key='child']");
+    let adultsTag = document.getElementById("fb-qs-summary-rooms-adults").firstChild;
+    let childrenTag = document.getElementById("fb-qs-summary-rooms-children").querySelector("[data-key='child']");
     
     return validate({
-        adults: + adultsTag.getAttribute('data-mode'),
-        children: + childrenTag.getAttribute('data-mode')
+        adults: + adultsTag.getAttribute("data-mode"),
+        children: + childrenTag.getAttribute("data-mode")
     })
 }
 
@@ -77,7 +77,7 @@ function getTotalAmountOfGuests() {
 }
 
 function getLanguageCode() {
-    let lang = document.firstElementChild.getAttribute('lang')
+    let lang = document.firstElementChild.getAttribute("lang")
     return validate(lang.toUpperCase());
 }
 
@@ -95,12 +95,12 @@ function getRoomDetails() {
 }
 
 function getAllRoomsRates() {
-    let results = document.getElementsByClassName('fb-results-accommodation')
+    let results = document.getElementsByClassName("fb-results-accommodation")
     let roomsRates = []
     
     Array.from(results).forEach( (room, index, array) => {
         let roomInfo = {}, roomDetails = {}
-        let price = + room.querySelector(".new-price").firstChild.getAttribute('data-price');
+        let price = + room.querySelector(".new-price").firstChild.getAttribute("data-price");
         
         roomInfo.price = Math.round(price * 100) / 100;
         roomDetails.breakfast = room.querySelector("[data-key='results-rate-meal-type-breakfast']").textContent
