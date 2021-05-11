@@ -14,4 +14,4 @@
 
 3. See them pass :chart: :point_down:
 
-<img src="tests-green.png>
+<img src="tests-green.png">
